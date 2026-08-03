@@ -1,3 +1,5 @@
+package Modelos;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,9 +23,13 @@ public class Alumno {
         this.correo = correo;
     }
 
+    public Alumno(int matricula){
+        this.matricula = matricula;
+    }
+
     public int guardar() throws Exception {
         try(Connection con = Conexion.getConexion();
-             PreparedStatement stmt = con.prepareStatement("insert into Alumnos (matricula, nombre, edad, sexo, correo) values(?, ?, ?, ?, ?)",
+            PreparedStatement stmt = con.prepareStatement("insert into Alumnos (matricula, nombre, edad, sexo, correo) values(?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
             stmt.setInt(1, this.matricula);
@@ -55,9 +61,25 @@ public class Alumno {
         }
     }
 
+    /*
+    public static Alumno find(int id) throws Exception {
+        try( Connection con= Conexion.getConexion();
+        PreparedStatement stmt = con.prepareStatement("select * from Alumnos where id = ?");
+        ) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Alumno(rs.getInt("id"), rs.getString("nombre"));
+            }
+            return null;
+        }
+    }
+    */
+
+
     public int modificarpormatricula() throws Exception {
         try(Connection con = Conexion.getConexion();
-        PreparedStatement stmt = con.prepareStatement("update Alumnos set nombre = ?, edad = ?, sexo = ?, correo = ? where matricula = ?");
+            PreparedStatement stmt = con.prepareStatement("update Alumnos set nombre = ?, edad = ?, sexo = ?, correo = ? where matricula = ?");
         ){
             stmt.setString(1, this.nombre);
             stmt.setInt(2, this.edad);
@@ -70,7 +92,7 @@ public class Alumno {
 
     public static int eliminarpormatricula(int matricula) throws Exception {
         try(Connection con = Conexion.getConexion();
-        PreparedStatement stmt = con.prepareStatement("delete from Alumnos where matricula = ?");
+            PreparedStatement stmt = con.prepareStatement("delete from Alumnos where matricula = ?");
         ) {
             stmt.setInt(1, matricula);
             return stmt.executeUpdate();
