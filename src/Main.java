@@ -46,12 +46,22 @@ public class Main {
                     }
                 break;
                 case 3:
+                    j = i + 1;
                     System.out.println("Modificando alumno");
                     System.out.println("Ingresa la matricula del alumno al que quieres modificar:");
                     matricula = scan.nextInt();
-                    Alumno a2 = new Alumno(matricula);
+                    System.out.println("Ingresa el nombre: ");
+                    nombre = scan.nextLine();
+                    System.out.println("Ingresa su edad: ");
+                    edad = scan.nextInt();
+                    System.out.println("Ingresa su genero: ");
+                    sexo = scan.nextLine();
+                    System.out.println("Ingresa su correo: ");
+                    correo = scan.nextLine();
+                    Alumno a2 = new Alumno(j, matricula, nombre, edad, sexo, correo);
                     a2.modificarpormatricula();
                     System.out.println("Alumno modificado");
+                    i = j;
                 break;
                 case 4:
                     System.out.println("Eliminando alumno");
