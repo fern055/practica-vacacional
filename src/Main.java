@@ -51,17 +51,19 @@ public class Main {
                     matricula = scan.nextInt();
                     Alumno a2 = new Alumno(matricula);
                     a2.modificarpormatricula();
-
+                    System.out.println("Alumno modificado");
                 break;
                 case 4:
                     System.out.println("Eliminando alumno");
                     System.out.println("Ingresa la matricula del alumno al que quieres modificar:");
                     matricula = scan.nextInt();
-                    Alumno a3 = new Alumno(matricula);
-                    a3.eliminarpormatricula();
+                    Alumno a3 = Alumno.buscarpormatricula(matricula);
+                    a3.eliminarpormatricula(matricula);
+                    System.out.println("Alumno eliminado");
                 break;
                 case 5:
-
+                    System.out.println("Contando hombre y mujeres");
+                    //?
                 break;
                 case 6:
                     System.out.println("Proceso terminado");

@@ -61,21 +61,18 @@ public class Alumno {
         }
     }
 
-    /*
-    public static Alumno find(int id) throws Exception {
+    public static Alumno buscarpormatricula(int matricula) throws Exception {
         try( Connection con= Conexion.getConexion();
-        PreparedStatement stmt = con.prepareStatement("select * from Alumnos where id = ?");
+        PreparedStatement stmt = con.prepareStatement("select * from Alumnos where matricula = ?");
         ) {
-            stmt.setInt(1, id);
+            stmt.setInt(1, matricula);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Alumno(rs.getInt("id"), rs.getString("nombre"));
+                return new Alumno(rs.getInt("id"), rs.getInt("matricula"), rs.getString("nombre"), rs.getInt("edad"), rs.getString("sexo"), rs.getString("correo"));
             }
             return null;
         }
     }
-    */
-
 
     public int modificarpormatricula() throws Exception {
         try(Connection con = Conexion.getConexion();
