@@ -3,4 +3,8 @@ public class Moto extends Vehiculo{
         Tarifa TM = new TarifaMoto();
         super(placa, horas, TM);
     }
+
+    public String toString(){
+        return "Moto";
+    }
 }

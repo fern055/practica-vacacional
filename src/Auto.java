@@ -3,4 +3,8 @@ public class Auto extends Vehiculo{
         Tarifa TA = new TarifaAuto();
         super(placa, horas, TA);
     }
+
+    public String toString(){
+        return "Auto";
+    }
 }

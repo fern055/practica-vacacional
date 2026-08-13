@@ -3,4 +3,8 @@ public class Camion extends Vehiculo{
         Tarifa TC = new TarifaCamion();
         super(placa, horas, TC);
     }
+
+    public String toString(){
+        return "Camion";
+    }
 }
