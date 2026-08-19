@@ -74,7 +74,10 @@ public class Main {
                 break;
                 case 5:
                     System.out.println("Contando hombre y mujeres");
-                    //?
+                    for(Alumno a4 : Alumno.mostrar()){
+                        Alumno.conteohym();
+                    }
+                    //???
                 break;
                 case 6:
                     System.out.println("Proceso terminado");
