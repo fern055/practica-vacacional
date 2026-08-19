@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 public class Conexion {
     private static String server = "localhost";
     private static String port = "1433";
-    private static String database = "Vehiculos";
+    private static String database = "Estacionamiento";
     private static String user = "sa";
     private static String password = "SqlServer2026!";
 
