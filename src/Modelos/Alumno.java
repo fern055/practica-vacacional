@@ -14,8 +14,16 @@ public class Alumno {
     private String sexo;
     private String correo;
 
-    public Alumno(int id, int matricula, String nombre, int edad, String sexo, String correo) {
+    private Alumno(int id, int matricula, String nombre, int edad, String sexo, String correo) {
         this.id = id;
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.correo = correo;
+    }
+
+    public Alumno(int matricula, String nombre, int edad, String sexo, String correo) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.edad = edad;
@@ -29,23 +37,20 @@ public class Alumno {
 
     public int guardar() throws Exception {
         try(Connection con = Conexion.getConexion();
-            PreparedStatement stmt = con.prepareStatement("insert into Alumnos (matricula, nombre, edad, sexo, correo) values(?, ?, ?, ?, ?)",
-                     PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = con.prepareStatement("insert into Alumnos_DB.exa.Alumnos (matricula, nombre, edad, sexo, correo) values(?, ?, ?, ?, ?)");
         ) {
             stmt.setInt(1, this.matricula);
             stmt.setString(2, this.nombre);
             stmt.setInt(3, this.edad);
             stmt.setString(4, this.sexo);
             stmt.setString(5, this.correo);
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
             return stmt.executeUpdate();
         }
     }
 
     public static List<Alumno> mostrar() throws Exception {
         try(Connection con = Conexion.getConexion();
-            PreparedStatement stmt = con.prepareStatement("select * from Alumnos");
+            PreparedStatement stmt = con.prepareStatement("select * from Alumnos_DB.exa.Alumnos");
             ResultSet rs = stmt.executeQuery();
                 ){
                     List <Alumno> lista = new ArrayList<>();
@@ -63,7 +68,7 @@ public class Alumno {
 
     public static Alumno buscarpormatricula(int matricula) throws Exception {
         try( Connection con= Conexion.getConexion();
-        PreparedStatement stmt = con.prepareStatement("select * from Alumnos where matricula = ?");
+        PreparedStatement stmt = con.prepareStatement("select * from Alumnos_DB.exa.Alumnos where matricula = ?");
         ) {
             stmt.setInt(1, matricula);
             ResultSet rs = stmt.executeQuery();
@@ -74,22 +79,23 @@ public class Alumno {
         }
     }
 
-    public int modificarpormatricula() throws Exception {
+    public int modificarpormatricula(int matricula) throws Exception {
         try(Connection con = Conexion.getConexion();
-            PreparedStatement stmt = con.prepareStatement("update Alumnos set nombre = ?, edad = ?, sexo = ?, correo = ? where matricula = ?");
+            PreparedStatement stmt = con.prepareStatement("update Alumnos_DB.exa.Alumnos set nombre = ?, edad = ?, sexo = ?, correo = ? where matricula = ?");
         ){
             stmt.setString(1, this.nombre);
             stmt.setInt(2, this.edad);
             stmt.setString(3, this.sexo);
             stmt.setString(4, this.correo);
             stmt.setInt(5, this.matricula);
-        return stmt.executeUpdate();
+            stmt.setInt(6, this.id);
+            return stmt.executeUpdate();
         }
     }
 
     public static int eliminarpormatricula(int matricula) throws Exception {
         try(Connection con = Conexion.getConexion();
-            PreparedStatement stmt = con.prepareStatement("delete from Alumnos where matricula = ?");
+            PreparedStatement stmt = con.prepareStatement("delete from Alumnos_DB.exa.Alumnos where matricula = ?");
         ) {
             stmt.setInt(1, matricula);
             return stmt.executeUpdate();
@@ -98,14 +104,14 @@ public class Alumno {
 
     public static int conteohym() throws Exception {
         try(Connection con = Conexion.getConexion();
-            PreparedStatement stmt = con.prepareStatement("select sexo, count(*) as total_count from Alumnos group by sexo");
+            PreparedStatement stmt = con.prepareStatement("select sexo, count(*) as total_count from Alumnos_DB.exa.Alumnos group by sexo");
             ResultSet rs = stmt.executeQuery();
         ){
             while(rs.next()){
                 rs.getString("sexo");
                 rs.getInt("total_count");
             }
-            return rs.getInt("total_count");
+            return stmt.executeUpdate();
             //no estoy segura de que deberia devolver aqui
         }
     }

@@ -6,7 +6,6 @@ public class Main {
     public static void main(String Args[]) throws Exception {
         Scanner scan = new Scanner(System.in);
         int opcion = 0;
-        int i = 0;
         while (opcion != 6) {
             System.out.println("Acciones: ");
             System.out.println("1) Guardar alumno");
@@ -19,7 +18,6 @@ public class Main {
 
             switch(opcion) {
                 case 1:
-                    int j = i + 1;
                     System.out.println("Creando alumno");
                     System.out.println("Ingresa su matricula: ");
                     int matricula = scan.nextInt();
@@ -31,8 +29,7 @@ public class Main {
                     String sexo = scan.nextLine();
                     System.out.println("Ingresa su correo: ");
                     String correo = scan.nextLine();
-                    Alumno a = new Alumno(j, matricula, nombre, edad, sexo, correo);
-                    i = j;
+                    Alumno a = new Alumno(matricula, nombre, edad, sexo, correo);
                     a.guardar();
                     //tenia problemas en este parte y termine creando un paquete
                     //basado en el ejemplo de animales
@@ -41,12 +38,17 @@ public class Main {
                 break;
                 case 2:
                     System.out.println("Mostrando listado de alumnos");
+                    System.out.println("-------------------------");
                     for (Alumno a1 : Alumno.mostrar()){
-                        System.out.println(a1.getNombre());
+                        System.out.println("Matricula: " + a1.getMatricula());
+                        System.out.println("Nombre: " + a1.getNombre());
+                        System.out.println("Edad: " + a1.getEdad());
+                        System.out.println("Genero: " + a1.getSexo());
+                        System.out.println("Correo: " + a1.getCorreo());
+                        System.out.println("-------------------------");
                     }
                 break;
                 case 3:
-                    j = i + 1;
                     System.out.println("Modificando alumno");
                     System.out.println("Ingresa la matricula del alumno al que quieres modificar:");
                     matricula = scan.nextInt();
@@ -58,10 +60,9 @@ public class Main {
                     sexo = scan.nextLine();
                     System.out.println("Ingresa su correo: ");
                     correo = scan.nextLine();
-                    Alumno a2 = new Alumno(j, matricula, nombre, edad, sexo, correo);
-                    a2.modificarpormatricula();
+                    Alumno a2 = new Alumno(matricula, nombre, edad, sexo, correo);
+                    a2.modificarpormatricula(matricula);
                     System.out.println("Alumno modificado");
-                    i = j;
                 break;
                 case 4:
                     System.out.println("Eliminando alumno");
