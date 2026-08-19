@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void Main(String Args[]) {
+    public static void Main(String Args[]) throws Exception{
         Scanner scan = new Scanner(System.in);
         Estacionamiento parking = new Estacionamiento();
         int opcion = 0;
@@ -36,6 +36,7 @@ public class Main {
                                 Vehiculo v1 = new Auto(placa, horas);
                                 parking.registrar(v1);
                                 System.out.println("Vehiculo registrado");
+                                v1.save();
                                 break;
                             case 2:
                                 System.out.println("Ingresa su placa: ");
@@ -45,6 +46,7 @@ public class Main {
                                 Vehiculo v2 = new Moto(placa, horas);
                                 parking.registrar(v2);
                                 System.out.println("Vehiculo registrado");
+                                v2.save();
                                 break;
                             case 3:
                                 System.out.println("Ingresa su placa: ");
@@ -54,6 +56,7 @@ public class Main {
                                 Vehiculo v3 = new Camion(placa, horas);
                                 parking.registrar(v3);
                                 System.out.println("Vehiculo registrado");
+                                v3.save();
                                 break;
                             default:
                                 System.out.println("Tipo de vehiculo invalido");
