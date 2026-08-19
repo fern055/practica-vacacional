@@ -14,11 +14,10 @@ public class Vehiculo {
 
     }
 
-    private Vehiculo(int id, String placa, int horas, Tarifa tarifas) {
+    private Vehiculo(int id, String placa, int horas) {
         this.id = id;
         this.placa = placa;
         this.horas = horas;
-        this.tarifas = tarifas;
     }
 
     public Vehiculo(String placa, int horas, Tarifa tarifas) {
@@ -46,7 +45,7 @@ public class Vehiculo {
             List<Vehiculo> vehiculos = new ArrayList<>();
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                vehiculos.add(new Vehiculo(rs.getInt("id"), rs.getString("placa"), rs.getInt("horas")))
+                vehiculos.add(new Vehiculo(rs.getInt("id"), rs.getString("placa"), rs.getInt("horas")));
             }
             return vehiculos;
         }
